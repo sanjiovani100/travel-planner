@@ -1,26 +1,58 @@
-# Travel Planner
+# Travel Planning Agent for LangGraph
 
-Travel Planner is responsible for managing trips stored in its internal state with the capability of reaching out to the internet using Google Maps.
+This is a sophisticated travel planning agent built with LangGraph and LangChain that integrates with Google Maps API to help users plan trips with natural language.
 
-## Usage
-This Agent is constructed using LangGraph and Python that is managed by Poetry. To get started you need to install its dependencies and start its server.
+## Features
 
-**These instructions assume you are in the `coagents-travel/agent/` directory**
+- 🗺️ **Google Maps Integration**: Real-time place search and discovery
+- 🤖 **Natural Language Understanding**: Plan trips using conversational language
+- 🔄 **Human-in-the-Loop**: Approve or reject AI suggestions before applying
+- 📍 **Multi-destination Support**: Plan complex itineraries with multiple stops
+- 🌐 **Real-time State Management**: Seamless synchronization between agent and UI
 
-To start you'll need to create a `.env` file with the following:
+## Architecture
 
+The agent consists of 4 main nodes:
+- **chat**: Handles conversation and tool orchestration
+- **search**: Integrates with Google Maps API for place discovery
+- **trips**: Manages trip data with human-in-the-loop approval
+- **perform_trips**: Executes approved trip modifications
+
+## Environment Variables
+
+Create a `.env` file with:
+
+```bash
+# Required
+OPENAI_API_KEY=your-openai-api-key
+GOOGLE_MAPS_API_KEY=your-google-maps-api-key
+
+# Optional (for tracing)
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=your-langsmith-key
+LANGCHAIN_PROJECT=travel-planner
 ```
-OPENAI_API_KEY=...
-GOOGLE_MAPS_API_KEY=...
-```
 
-From there you can install the dependencies and start the server:
-```sh
-poetry install
-poetry run demo
-```
+## Deployment
 
-The server is configured to run on port 8000. If you have any trouble, make sure you're using the same version of Python as specified in the `pyproject.toml` file.
+This agent is designed to be deployed on LangGraph Platform. The `langgraph.json` file contains all necessary configuration.
 
-## Agent Diagram
-![Agent Diagram](./static/agent-diagram.png)
+## Local Development
+
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. Run the demo:
+   ```bash
+   python -m travel.demo
+   ```
+
+## API Endpoints
+
+Once deployed, the agent exposes standard LangGraph endpoints for interaction with CoPilotKit or other clients.
+
+## License
+
+Part of the CoPilotKit examples collection.
